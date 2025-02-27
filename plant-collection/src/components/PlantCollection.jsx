@@ -1,52 +1,44 @@
 import React, { useState } from 'react';
-
+import PlantList from './PlantList';  
 function PlantCollection() {
   const [plants, setPlants] = useState([]);
-  const [form, setForm] = useState({ name: '', species: '', description: '' });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
+  const [name, setName] = useState('');
+  const [species, setSpecies] = useState('');
+  const [description, setDescription] = useState('');
 
   const addPlant = () => {
-    if (!form.name || !form.species || !form.description) return;
-    setPlants([...plants, { id: plants.length + 1, ...form }]);
-    setForm({ name: '', species: '', description: '' });
+    if (name && species && description) {
+      setPlants([...plants, { id: plants.length + 1, name, species, description }]);
+      setName('');
+      setSpecies('');
+      setDescription('');
+    }
   };
 
   return (
     <div>
       <h1>Plant Collection</h1>
-      <form>
-        <input 
-          type="text" 
-          name="name" 
-          placeholder="Nom de la plante"
-          value={form.name} 
-          onChange={handleChange} 
-        />
-        <input 
-          type="text" 
-          name="species" 
-          placeholder="Espèce"
-          value={form.species} 
-          onChange={handleChange} 
-        />
-        <textarea 
-          name="description"
-          placeholder="Description"
-          value={form.description} 
-          onChange={handleChange} 
-        />
-        <button type="button" onClick={addPlant}>Ajouter</button>
-      </form>
+      <input 
+        type="text" 
+        placeholder="Nom" 
+        value={name} 
+        onChange={(e) => setName(e.target.value)} 
+      />
+      <input 
+        type="text" 
+        placeholder="Espèce" 
+        value={species} 
+        onChange={(e) => setSpecies(e.target.value)} 
+      />
+      <textarea 
+        placeholder="Description" 
+        value={description} 
+        onChange={(e) => setDescription(e.target.value)} 
+      />
+      <button onClick={addPlant}>Ajouter</button>
 
-      <ul>
-        {plants.map((plant) => (
-          <li key={plant.id}>{plant.name} ({plant.species}): {plant.description}</li>
-        ))}
-      </ul>
+      {/* Affichage des plantes avec PlantList */}
+      <PlantList plants={plants} />
     </div>
   );
 }
