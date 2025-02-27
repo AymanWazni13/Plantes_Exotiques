@@ -39,3 +39,5 @@ plant-collection/
 installez les routers :
 
 npm install react-router-dom
+
+istallez redux : npm install redux react-redux

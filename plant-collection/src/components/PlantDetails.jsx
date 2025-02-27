@@ -5,10 +5,11 @@ function PlantDetails() {
   const [plant, setPlant] = useState(null);
 
   useEffect(() => {
-    // Exemple d'API pour obtenir des détails de plante (remplacer avec l'API réelle)
-    fetch('https://trefle.io/api/v1/plants?token=-MHEEsUWXCrfVYuO3WCngPHek2ltx7Qbb5LO1t3IqxM') 
-      .then(response => response.json())
-      .then(data => setPlant(data));
+    fetch('https://trefle.io/api/v1/plants?token=-MHEEsUWXCrfVYuO3WCngPHek2ltx7Qbb5LO1t3IqxM', {
+      headers: { 'Authorization': 'Bearer ' },
+    })
+      .then((response) => response.json())
+      .then((data) => setPlant(data.data));
   }, []);
 
   if (!plant) {
@@ -17,10 +18,10 @@ function PlantDetails() {
 
   return (
     <div>
-      <h2>{plant.name}</h2>
-      <p>{plant.species}</p>
+      <h2>{plant.name.common}</h2>
+      <p>{plant.family}</p>
       <p>{plant.description}</p>
-      <img src={plant.image} alt={plant.name} />
+      <img src={plant.image_url} alt={plant.name.common} />
     </div>
   );
 }

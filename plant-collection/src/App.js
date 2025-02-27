@@ -1,26 +1,23 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import PlantCollection from './components/PlantCollection';
-import PlantDetails from './components/PlantDetails';
-import Navigation from './components/Navigation';
-
+import { Provider } from 'react-redux';
+import store from './store';
+import PlantCollection from './PlantCollection';
+import PlantDetails from './PlantDetails';
+import Navigation from './Navigation';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <header className="App-header">
-          {/* Navigation */}
-          <Navigation />
-
-          <Routes>
-            <Route path="/" element={<PlantCollection />} />
-            <Route path="/details" element={<PlantDetails />} />
-          </Routes>
-        </header>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Navigation />
+        <Routes>
+          {/* Utilisation de element au lieu de component */}
+          <Route path="/" element={<PlantCollection />} />
+          <Route path="/details" element={<PlantDetails />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 
