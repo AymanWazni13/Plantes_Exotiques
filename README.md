@@ -36,3 +36,6 @@ plant-collection/
 │   └── index.js
 └── package.json
 
+installez les routers :
+
+npm install react-router-dom
