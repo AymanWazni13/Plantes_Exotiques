@@ -14,7 +14,7 @@ Installation et lancement
 
 Cloner le dépôt :
 
-   git clone [URL_DU_REPO]
+   git clone 
    cd plant-collection
 
 Installer les dépendances :
